@@ -1,0 +1,32 @@
+{
+  "name": "metalsmith-virtual-pages",
+  "version": "0.0.1",
+  "description": "Metalsmith plugin that generates pages from JSON data on the fly",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
+  "scripts": {
+    "test": "mocha --reporter spec --compilers coffee:coffee-script",
+    "prepublish": "coffee -co src/index.litcoffee lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamkiss/metalsmith-virtual-pages.git"
+  },
+  "keywords": [
+    "metalsmith",
+    "metalsmithplugin",
+    "virtual pages",
+    "json"
+  ],
+  "author": "Adam Kiss <iam@adamkiss.com> (http:/adamkiss.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamkiss/metalsmith-virtual-pages/issues"
+  },
+  "homepage": "https://github.com/adamkiss/metalsmith-virtual-pages#readme",
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  }
+}
