@@ -110,12 +110,12 @@ describe 'Virtual Pages', ()->
       .source 'src'
       .destination 'dist'
       .use smithInPlace 'handlebars'
-      .use virtualPages({
-        'simple': virtualPagesJson.simple
-        'features': virtualPagesJson.features
-        'ignore': virtualPagesJson.ignore
-        'tree': virtualPagesJson.tree
-      })
+      .use virtualPages([
+        virtualPagesJson.simple
+        virtualPagesJson.features
+        virtualPagesJson.ignore
+        virtualPagesJson.tree
+      ])
       .build (err, files)->
         done(err) if err
         pages = [
