@@ -35,7 +35,7 @@ module.exports = (generators, opts)->
   childPath = (filePath, childSlug)->
     parsed = path.parse filePath
     dir = if parsed.dir then parsed.dir+'/' else ''
-    [dir, parsed.name, '/', childSlug, parsed.ext].join ''
+    [dir, parsed.name, '/', childSlug].join ''
 
   sourceExists = (filePath, rootPath)->
     try
