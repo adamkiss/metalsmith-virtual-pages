@@ -51,7 +51,7 @@ module.exports = (generators, opts)->
     metadata = {}
     for key, value of content
       # if key starts with /, it's a child page
-      if key[0..1] is '/'
+      if key[0] is '/'
         children[childPath filePath, key[1..]] = value
       else
         # While last letter is control character (= multipass)
