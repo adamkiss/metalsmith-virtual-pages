@@ -1,5 +1,5 @@
 should = require('chai').should()
-equal  = require 'assert-equal-dir'
+assert  = require 'assert-dir-equal'
 smith = require 'metalsmith'
 smithInPlace = require 'metalsmith-in-place'
 
@@ -27,10 +27,10 @@ describe 'Virtual Pages', ()->
         gen   = files['simple.html']
         gen.should.be.a 'object'
         gen.should.contain.all.keys ['title', 'tags', 'author', 'contents']
-        gen.tags.should.have.lengthOf(2)
+        gen.tags.should.have.lengthOf(3)
         Object.keys(gen.author).should.have.lengthOf(3)
 
-        equal 'fixtures/simple/dist', 'fixtures/simple/expected'
+        assert 'test/fixtures/simple/dist', 'test/fixtures/simple/expected'
         do done
 
   it 'should generate features correctly', (done)->
@@ -41,27 +41,16 @@ describe 'Virtual Pages', ()->
       .use smithInPlace 'handlebars'
       .build (err, files)->
         done(err) if err
-        Object.keys(files).should.have.lengthOf(2)
-
-        index = files['index.html']
-        index.should.be.a 'object'
-        index.should.contain.all.keys ['contents', 'title']
-
-        gen   = files['simple.html']
-        gen.should.be.a 'object'
-        gen.should.contain.all.keys ['title', 'tags', 'author', 'contents']
-        gen.tags.should.have.lengthOf(2)
-        Object.keys(gen.author).should.have.lengthOf(3)
-
-        equal 'fixtures/simple/dist', 'fixtures/simple/expected'
+        Object.keys(files).should.have.lengthOf(4)
+        assert 'test/fixtures/features/dist/', 'test/fixtures/features/expected/'
         do done
 
 
-  it 'should skip files with ignore: true', (done)->
+  it 'should skip files with ignore: true and keep source', (done)->
     newMetalsmith 'ignore'
       .source 'src'
       .destination 'dist'
-      .use virtualPages(virtualPagesJson.ignore, { keepSource: true })
+      .use virtualPages(virtualPagesJson.ignore, { keepSources: true })
       .use smithInPlace 'handlebars'
       .build (err, files)->
         done(err) if err
@@ -78,30 +67,31 @@ describe 'Virtual Pages', ()->
         Object.keys(gen.author).should.have.lengthOf(3)
 
 
-        equal 'fixtures/ignore/dist', 'fixtures/ignore/expected'
+        assert 'test/fixtures/ignore/dist', 'test/fixtures/ignore/expected'
         do done
 
   it 'should generate tree of pages', (done)->
     newMetalsmith 'tree'
       .source 'src'
       .destination 'dist'
-      .use smithInPlace 'handlebars'
       .use virtualPages(virtualPagesJson.tree)
+      .use smithInPlace 'handlebars'
       .build (err, files)->
         done(err) if err
         pages = [
-          'index.html', 'grandparent.html', 'grandparent/parent.htm',
+          'index.html'
+          'grandparent.html'
+          'grandparent/parent.htm' #!
           'grandparent/parent/child.html'
         ]
 
         Object.keys(files).should.have.lengthOf(4)
-        Object.keys(files).should.contain.all.keys pages
+        files.should.have.all.keys pages
 
         pages.forEach (target)->
           files[target].should.be.a 'object'
-          files[target].contents.should.be.equal files['index.html'].contents
 
-        equal 'fixtures/tree/dist', 'fixtures/tree/expected'
+        assert 'test/fixtures/tree/dist', 'test/fixtures/tree/expected'
 
         do done
 
@@ -119,7 +109,9 @@ describe 'Virtual Pages', ()->
       .build (err, files)->
         done(err) if err
         pages = [
-          'index.html', 'grandparent.html', 'grandparent/parent.htm',
+          'index.html'
+          'grandparent.html'
+          'grandparent/parent.htm',
           'grandparent/parent/child.html'
         ]
 
@@ -130,7 +122,7 @@ describe 'Virtual Pages', ()->
           files[target].should.be.a 'object'
           files[target].contents.should.be.equal files['index.html'].contents
 
-        equal 'fixtures/multiple/dist', 'fixtures/multiple/expected'
+        assert 'test/fixtures/multiple/dist', 'test/fixtures/multiple/expected'
 
         do done
 

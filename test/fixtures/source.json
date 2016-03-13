@@ -23,7 +23,7 @@
       "contents": "source.html"
     },
     "features-external.html": {
-      "title": "A full featured generated page",
+      "title": "Full featured page with other source",
       "tags": ["test", "article", "markdown"],
       "evaluated?": "s.tags.length == 3",
       "lodash?": "_.noop({}) === undefined",
@@ -45,7 +45,7 @@
   },
   "ignore": {
     "notignored.html": {
-      "title": "A simple generated page",
+      "title": "Ignore: nonignored page",
       "tags": ["test", "article", "markdown"],
       "author": {
         "name": "Adam Kiss",
@@ -55,22 +55,22 @@
       "contents": "source.html"
     },
     "skipped.html": {
-      "title": "This page is skipped",
+      "title": "Ignore: This one is skipped",
       "template": "index.html",
       "ignore?" : "s.title == 'This page is skipped'"
     }
   },
   "tree": {
     "grandparent.html": {
-      "title": "TT: Grandparent",
+      "title": "Grandparent",
       "tags": ["test", "article", "markdown"],
       "contents": "source.html",
       "/parent.htm": {
-        "title": "Child of ${p.title}",
+        "title$": "Child of ${p.title}",
         "tags": ["test", "article", "markdown"],
         "contents": "source.html",
         "/child.html": {
-          "title": "Child of ${p.title}",
+          "title$": "Child of ${p.title}",
           "tags": ["test", "article", "markdown"],
           "contents": "source.html"
         }
