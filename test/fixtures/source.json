@@ -8,7 +8,7 @@
         "email": "iam@adamkiss.com",
         "website": "http://adamkiss.com"
       },
-      "contents": "source.html"
+      "contents": "source-simple.html"
     }
   },
   "features": {
@@ -52,7 +52,7 @@
         "email": "iam@adamkiss.com",
         "website": "http://adamkiss.com"
       },
-      "contents": "source.html"
+      "contents": "source-ignore.html"
     },
     "skipped.html": {
       "title": "Ignore: This one is skipped",
@@ -64,15 +64,15 @@
     "grandparent.html": {
       "title": "Grandparent",
       "tags": ["test", "article", "markdown"],
-      "contents": "source.html",
+      "contents": "source-tree.html",
       "/parent.htm": {
         "title$": "Child of ${p.title}",
         "tags": ["test", "article", "markdown"],
-        "contents": "source.html",
+        "contents": "source-tree.html",
         "/child.html": {
           "title$": "Child of ${p.title}",
           "tags": ["test", "article", "markdown"],
-          "contents": "source.html"
+          "contents": "source-tree.html"
         }
       }
     }
