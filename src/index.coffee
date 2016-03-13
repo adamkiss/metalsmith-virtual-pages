@@ -4,16 +4,22 @@
 _    = require 'lodash'
 path = require 'path'
 
-module.exports = (options)->
+module.exports = (generators, opts)->
+  defaults = {
+    keepSources: false
+    markdown: {
+      html: true
+      breaks: true
+      linkify: true
+      typographer: true
+    }
+  }
+  options = if opts? then _.extend(defaults, opts) else defaults
+
   #
   # Setup / plugins
   #
-  markdownOptions = _.extend {
-    html: true
-    breaks: true
-    linkify: true
-    typographer: true
-  }, options.markdown
+  markdownOptions = options.markdown
 
   markdown = require('markdown-it')(markdownOptions)
     .use(require('markdown-it-footnote'))
