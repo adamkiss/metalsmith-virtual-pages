@@ -3,6 +3,7 @@
 #
 _    = require 'lodash'
 path = require 'path'
+fs   = require 'fs'
 
 module.exports = (generators, opts)->
   defaults = {
@@ -36,10 +37,16 @@ module.exports = (generators, opts)->
     dir = if parsed.dir then parsed.dir+'/' else ''
     [dir, parsed.name, '/', childSlug, parsed.ext].join ''
 
+  sourceExists = (filePath, rootPath)->
+    try
+      (fs.statSync path.join rootPath, filePath)?
+    catch error
+      false
+
   #
   # Path processing
   #
-  processPath = (files, filePath, content, parent)->
+  processPath = (rootPath, files, filePath, content, parent)->
     children = {}
     metadata = {}
     for key, value of content
@@ -59,11 +66,25 @@ module.exports = (generators, opts)->
           key = key[0..-2]
         metadata[key] = value
 
+        # get contents;
+        if key is 'contents'
+          # is contents a file in metalsmith files?
+          if files[value]?
+            sourceFile = value
+            metadata[key] = files[sourceFile].contents
+            delete files[sourceFile] unless options.keepSources
+          # is contents an existing file in ms root?
+          else if sourceExists(value, rootPath)
+            metadata[key] = fs.readFileSync path.join rootPath, value
+          # just buffer it
+          else
+            metadata[key] = new Buffer value
+
     # Add to processed, process children and return
     unless metadata.ignore?
       processed = { "#{filePath}": metadata }
       for childPath, childContent of children
-        _.extend(processed, processPath(childPath, childContent, metadata))
+        _.extend(processed, processPath(rootPath, files, childPath, childContent, metadata))
       processed
     else
       {}
@@ -73,6 +94,6 @@ module.exports = (generators, opts)->
   #
   (files, ms, done)->
     for name, content of generators
-      _.extend files, processPath(files, name, content)
+      _.extend files, processPath(ms._directory, files, name, content)
     console.log Object.keys files
     done()
