@@ -5,7 +5,7 @@ _    = require 'lodash'
 path = require 'path'
 fs   = require 'fs'
 
-module.exports = (generators, opts)->
+module.exports = (generator, opts)->
   defaults = {
     keepSources: false
     markdown: {
@@ -93,11 +93,21 @@ module.exports = (generators, opts)->
   # metalsmith pluggin (wrapper)
   #
   (files, ms, done)->
-    for name, content of generators
+    # if multple generators, merge them into one
+    if _(generator).isArray()
+      generator.unshift {}
+      generator = _.merge.apply(_, generator)
+
+    # let's go
+    for name, content of generator
       _.extend(
         files,
         processPath(ms._directory, files, name, content)
       )
+
+    # cleanup
     unless options.keepSources
       delete files[sourceFile] for sourceFile in sourceFiles
+
+    # done
     done()
