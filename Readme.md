@@ -1,6 +1,6 @@
 # Virtual Pages plugin for Metalsmith
 
-This is a plugin for [Metalsmith][] that takes a JSON input a generates pages with its contents. It's useful if you have many (more than one:) ) simple pages you'd like to have in place, but generate separate pages.
+This is a plugin for [Metalsmith][] that takes a JSON input a generates pages from its contents. It's useful if you have a set of pages you'd like to create/edit at single place (e.g. YAML file), but generate separate pages.
 
 Unlike [metalsmith-json-to-files][], it works with a variable, not a file path, which is useful if the JSON data come from elsewhere, or were loaded from other format and transformed before running Metalsmith.
 
