@@ -17,8 +17,8 @@
       "tags": ["test", "article", "markdown"],
       "evaluated?": "s.tags.length == 3",
       "markdown_": "# This is a headline\n\nThis is a paragraph",
-      "templated%": "<h2>$( title )</h2>",
-      "templatedMarkdown_%": "## ${ s.title }\n\nThis is more text with ${ s.evaluated }",
+      "templated$": "<h2>${s.title}</h2>",
+      "templatedMarkdown_$": "## ${s.title}\n\nThis is more text with ${s.evaluated}",
       "contents": "source.html"
     }
   },
@@ -41,32 +41,17 @@
   },
   "tree": {
     "grandparent.html": {
-      "title": "Tree testing: Grandparent",
+      "title": "TT: Grandparent",
       "tags": ["test", "article", "markdown"],
-      "author": {
-        "name": "Adam Kiss",
-        "email": "iam@adamkiss.com",
-        "website": "http://adamkiss.com"
-      },
-      "contents": "index.html",
+      "contents": "source.html",
       "/parent.htm": {
-        "title": "Tree testing: Grandparent",
+        "title": "Child of ${p.title}",
         "tags": ["test", "article", "markdown"],
-        "author": {
-          "name": "Adam Kiss",
-          "email": "iam@adamkiss.com",
-          "website": "http://adamkiss.com"
-        },
-        "contents": "index.html",
+        "contents": "source.html",
         "/child.html": {
-          "title": "Tree testing: Grandparent",
+          "title": "Child of ${p.title}",
           "tags": ["test", "article", "markdown"],
-          "author": {
-            "name": "Adam Kiss",
-            "email": "iam@adamkiss.com",
-            "website": "http://adamkiss.com"
-          },
-          "contents": "index.html"
+          "contents": "source.html"
         }
       }
     }
