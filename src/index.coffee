@@ -59,11 +59,10 @@ module.exports = (generators, opts)->
           key = key[0..-2]
         metadata[key] = value
 
+    # Add to processed, process children and return
     processed = { "#{filePath}": metadata }
-
     for childPath, childContent of children
       _.extend(processed, processPath(childPath, childContent, metadata))
-
     processed
 
   #
