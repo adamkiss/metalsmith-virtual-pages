@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-virtual-pages",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Metalsmith plugin that generates pages from JSON data on the fly",
   "main": "lib/index.js",
   "files": [
