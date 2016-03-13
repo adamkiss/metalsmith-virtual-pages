@@ -83,8 +83,8 @@ module.exports = (generators, opts)->
     # Add to processed, process children and return
     unless metadata.ignore?
       processed = { "#{filePath}": metadata }
-      for childPath, childContent of children
-        _.extend(processed, processPath(rootPath, files, childPath, childContent, metadata))
+      for childFilePath, childContent of children
+        _.extend(processed, processPath(rootPath, files, childFilePath, childContent, metadata))
       processed
     else
       {}
