@@ -47,15 +47,17 @@ module.exports = (generators, opts)->
       if key[0..1] is '/'
         children[childPath filePath, key[1..]] = value
       else
-        switch key[-1..] # Last letter might be a control char
-          when '_'
-            metadata[key[0..-2]] = markdown.render value
-          when '$'
-            tpl = _.template value
-            metadata[key[0..-2]] = tpl {s: metadata, p: parent}
-          when '?'
-            metadata[key[0..-2]] = evaluate value, metadata, parent
-          else metadata[key] = value
+        # While last letter is control character (= multipass)
+        while key[-1..] in ['_', '$', '?']
+          switch key[-1..] # Last letter might be a control char
+            when '_' then value = markdown.render value
+            when '$'
+              tpl = _.template value
+              value = tpl {s: metadata, p: parent}
+            when '?'
+              value = evaluate value, metadata, parent
+          key = key[0..-2]
+        metadata[key] = value
 
     processed = { "#{filePath}": metadata }
 
