@@ -43,17 +43,19 @@ module.exports = (generators, opts)->
     children = {}
     metadata = {}
     for key, value of content
-      switch key[-1..] # Last letter might be a control char
-        when '/'
-          children[childPath filePath, key[0..-2]] = value
-        when '_'
-          metadata[key[0..-2]] = markdown value
-        when '$'
-          tpl = _.template value
-          metadata[key[0..-2]] = tpl {s: metadata, p: parent}
-        when '?'
-          metadata[key[0..-2]] = evaluate value, metadata, parent
-        else metadata[key] = value
+      # if key starts with /, it's a child page
+      if key[0..1] is '/'
+        children[childPath filePath, key[0..-2]] = value
+      else
+        switch key[-1..] # Last letter might be a control char
+          when '_'
+            metadata[key[0..-2]] = markdown.render value
+          when '$'
+            tpl = _.template value
+            metadata[key[0..-2]] = tpl {s: metadata, p: parent}
+          when '?'
+            metadata[key[0..-2]] = evaluate value, metadata, parent
+          else metadata[key] = value
 
     processed = { "#{filePath}": metadata }
 
@@ -66,7 +68,7 @@ module.exports = (generators, opts)->
   # metalsmith pluggin (wrapper)
   #
   (files, ms, done)->
-    for name, content of options
+    for name, content of generators
       _.extend files, processPath(name, content)
-    console.log files
+    console.log Object.keys files
     done()
