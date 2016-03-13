@@ -60,10 +60,13 @@ module.exports = (generators, opts)->
         metadata[key] = value
 
     # Add to processed, process children and return
-    processed = { "#{filePath}": metadata }
-    for childPath, childContent of children
-      _.extend(processed, processPath(childPath, childContent, metadata))
-    processed
+    unless metadata.ignore?
+      processed = { "#{filePath}": metadata }
+      for childPath, childContent of children
+        _.extend(processed, processPath(childPath, childContent, metadata))
+      processed
+    else
+      {}
 
   #
   # metalsmith pluggin (wrapper)
