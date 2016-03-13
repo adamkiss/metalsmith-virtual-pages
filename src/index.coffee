@@ -95,5 +95,4 @@ module.exports = (generators, opts)->
   (files, ms, done)->
     for name, content of generators
       _.extend files, processPath(ms._directory, files, name, content)
-    console.log Object.keys files
     done()
