@@ -30,8 +30,9 @@
     "assert-dir-equal": "^1.0.1",
     "chai": "^3.5.0",
     "coffee-script": "^1.10.0",
+    "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
-    "metalsmith-layouts": "^1.6.4",
+    "metalsmith-in-place": "^1.4.3",
     "metalsmith-markdown": "^0.2.1",
     "mocha": "^2.4.5"
   },
