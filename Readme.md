@@ -22,6 +22,8 @@ require('metalsmith')(__dirname)
   .build();
 ```
 
+Additionally, the first argument might be an array of sources. In that case, the array will be merged into one object and processed.
+
 ## Data format
 
 The first argument is an associative array consisting of `path: {metadata/content/options}` pairs:
@@ -102,6 +104,9 @@ ISC
 [Adam Kiss](http://adamkiss.com)
 
 ## Changelog
+
+### v0.4.0
+- Support for multiple generators (passed as an array of generators)
 
 ### v0.3.0
 - Added a readme. This is such a big accomplishment, there's a new minor version for it.
