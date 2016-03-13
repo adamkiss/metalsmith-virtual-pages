@@ -99,28 +99,32 @@ describe 'Virtual Pages', ()->
     newMetalsmith 'multiple'
       .source 'src'
       .destination 'dist'
-      .use smithInPlace 'handlebars'
       .use virtualPages([
         virtualPagesJson.simple
         virtualPagesJson.features
         virtualPagesJson.ignore
         virtualPagesJson.tree
       ])
+      .use smithInPlace 'handlebars'
       .build (err, files)->
         done(err) if err
         pages = [
           'index.html'
+          'simple.html'
+          'notignored.html'
+          'features.html'
+          'features-external.html'
+          'features-inside.html'
           'grandparent.html'
           'grandparent/parent.htm',
           'grandparent/parent/child.html'
         ]
 
-        Object.keys(files).should.have.lengthOf(4)
-        Object.keys(files).should.contain.all.keys pages
+        Object.keys(files).should.have.lengthOf(9)
+        files.should.have.all.keys pages
 
         pages.forEach (target)->
           files[target].should.be.a 'object'
-          files[target].contents.should.be.equal files['index.html'].contents
 
         assert 'test/fixtures/multiple/dist', 'test/fixtures/multiple/expected'
 
