@@ -45,7 +45,7 @@ module.exports = (generators, opts)->
     for key, value of content
       # if key starts with /, it's a child page
       if key[0..1] is '/'
-        children[childPath filePath, key[0..-2]] = value
+        children[childPath filePath, key[1..]] = value
       else
         switch key[-1..] # Last letter might be a control char
           when '_'
