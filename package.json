@@ -7,8 +7,8 @@
     "lib/index.js"
   ],
   "scripts": {
-    "test": "mocha --reporter spec --compilers coffee:coffee-script",
-    "prepublish": "coffee -co src/index.litcoffee lib"
+    "test": "mocha --reporter spec --compilers coffee:coffee-script/register",
+    "prepublish": "coffee -o lib -c src/index.coffee"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,16 @@
   "homepage": "https://github.com/adamkiss/metalsmith-virtual-pages#readme",
   "devDependencies": {
     "assert-dir-equal": "^1.0.1",
+    "chai": "^3.5.0",
     "coffee-script": "^1.10.0",
     "metalsmith": "^2.1.0",
+    "metalsmith-layouts": "^1.6.4",
+    "metalsmith-markdown": "^0.2.1",
     "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "lodash": "^4.6.1",
+    "markdown-it": "^6.0.0",
+    "markdown-it-footnote": "^2.0.0"
   }
 }
