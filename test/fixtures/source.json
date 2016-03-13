@@ -16,6 +16,7 @@
       "title": "A full featured generated page",
       "tags": ["test", "article", "markdown"],
       "evaluated?": "s.tags.length == 3",
+      "lodash?": "_.noop({}) === undefined",
       "markdown_": "# This is a headline\n\nThis is a paragraph",
       "templated$": "<h2>${s.title}</h2>",
       "templatedMarkdown_$": "## ${s.title}\n\nThis is more text with ${s.evaluated}",
