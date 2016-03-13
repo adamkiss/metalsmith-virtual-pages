@@ -39,7 +39,7 @@ module.exports = (generators, opts)->
   #
   # Path processing
   #
-  processPath = (filePath, content, parent)->
+  processPath = (files, filePath, content, parent)->
     children = {}
     metadata = {}
     for key, value of content
@@ -73,6 +73,6 @@ module.exports = (generators, opts)->
   #
   (files, ms, done)->
     for name, content of generators
-      _.extend files, processPath(name, content)
+      _.extend files, processPath(files, name, content)
     console.log Object.keys files
     done()
