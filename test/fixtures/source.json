@@ -21,6 +21,26 @@
       "templated$": "<h2>${s.title}</h2>",
       "templatedMarkdown_$": "## ${s.title}\n\nThis is more text with ${s.evaluated}",
       "contents": "source.html"
+    },
+    "features-external.html": {
+      "title": "A full featured generated page",
+      "tags": ["test", "article", "markdown"],
+      "evaluated?": "s.tags.length == 3",
+      "lodash?": "_.noop({}) === undefined",
+      "markdown_": "# This is a headline\n\nThis is a paragraph",
+      "templated$": "<h2>${s.title}</h2>",
+      "templatedMarkdown_$": "## ${s.title}\n\nThis is more text with ${s.evaluated}",
+      "contents": "vsrc/source.html"
+    },
+    "features-inside.html": {
+      "title": "Full featured page with full source from JSON",
+      "tags": ["test", "article", "markdown"],
+      "evaluated?": "s.tags.length == 3",
+      "lodash?": "_.noop({}) === undefined",
+      "markdown_": "# This is a headline\n\nThis is a paragraph",
+      "templated$": "<h2>${s.title}</h2>",
+      "templatedMarkdown_$": "## ${s.title}\n\nThis is more text with ${s.evaluated}",
+      "contents": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>{{ title }}</title>\n</head>\n<body>\n  {{{ markdown }}}\n  {{{ templated }}}\n  {{{ templatedMarkdown }}}\n</body>\n</html>"
     }
   },
   "ignore": {
