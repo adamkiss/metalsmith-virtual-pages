@@ -16,6 +16,7 @@ module.exports = (generators, opts)->
     }
   }
   options = if opts? then _.extend(defaults, opts) else defaults
+  sourceFiles = []
 
   #
   # Setup / plugins
@@ -70,9 +71,8 @@ module.exports = (generators, opts)->
         if key is 'contents'
           # is contents a file in metalsmith files?
           if files[value]?
-            sourceFile = value
-            metadata[key] = files[sourceFile].contents
-            delete files[sourceFile] unless options.keepSources
+            sourceFiles.push(value) if sourceFiles.indexOf(value) is -1
+            metadata[key] = files[value].contents
           # is contents an existing file in ms root?
           else if sourceExists(value, rootPath)
             metadata[key] = fs.readFileSync path.join rootPath, value
@@ -94,5 +94,10 @@ module.exports = (generators, opts)->
   #
   (files, ms, done)->
     for name, content of generators
-      _.extend files, processPath(ms._directory, files, name, content)
+      _.extend(
+        files,
+        processPath(ms._directory, files, name, content)
+      )
+    unless options.keepSources
+      delete files[sourceFile] for sourceFile in sourceFiles
     done()
