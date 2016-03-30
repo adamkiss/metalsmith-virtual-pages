@@ -95,6 +95,32 @@ describe 'Virtual Pages', ()->
 
         do done
 
+  it 'should generate tree with multipass parent', (done)->
+    newMetalsmith 'tree-multipass'
+      .source 'src'
+      .destination 'dist'
+      .use virtualPages(virtualPagesJson.treeMultipass)
+      .use smithInPlace 'handlebars'
+      .build (err, files)->
+        done(err) if err
+        pages = [
+          'index.html'
+          'grandparent.php.html'
+          'grandparent/parent.that.php.htm' #!
+          'grandparent/parent/child.wat.php.html'
+        ]
+
+        Object.keys(files).should.have.lengthOf(4)
+        files.should.have.all.keys pages
+
+        pages.forEach (target)->
+          files[target].should.be.a 'object'
+
+        assert 'test/fixtures/tree/dist', 'test/fixtures/tree/expected'
+
+        do done
+
+
   it 'should handle multiple sources', (done)->
     newMetalsmith 'multiple'
       .source 'src'

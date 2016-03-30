@@ -76,5 +76,21 @@
         }
       }
     }
-  }
-}
+  },
+  "treeMultipass": {
+    "grandparent.php.html": {
+      "title": "Grandparent",
+      "tags": ["test", "article", "markdown"],
+      "contents": "source-tree.html",
+      "/parent.that.php.htm": {
+        "title$": "Child of ${p.title}",
+        "tags": ["test", "article", "markdown"],
+        "contents": "source-tree.html",
+        "/child.wat.php.html": {
+          "title$": "Child of ${p.title}",
+          "tags": ["test", "article", "markdown"],
+          "contents": "source-tree.html"
+        }
+      }
+    }
+  }}
