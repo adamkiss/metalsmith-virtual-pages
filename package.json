@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-virtual-pages",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Metalsmith plugin that generates pages from JSON data on the fly",
   "main": "lib/index.js",
   "files": [
@@ -21,7 +21,7 @@
     "json",
     "json pages"
   ],
-  "author": "Adam Kiss <iam@adamkiss.com> (http:/adamkiss.com)",
+  "author": "adamkiss <iamadamkiss+npm@gmail.com> (https://adamkiss.com)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/adamkiss/metalsmith-virtual-pages/issues"
