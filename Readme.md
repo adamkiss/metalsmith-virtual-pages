@@ -1,4 +1,8 @@
-# Virtual Pages plugin for Metalsmith
+ # [🔴DISCONTINUED] Virtual Pages plugin for Metalsmith
+
+> This plugin hasn't been used and touched for over two years. Use something else, or write your own inline plugin.
+
+---
 
 This is a plugin for [Metalsmith][] that takes a JSON input a generates pages from its contents. It's useful if you have a set of pages you'd like to create/edit at single place (e.g. YAML file), but generate separate pages.
 
